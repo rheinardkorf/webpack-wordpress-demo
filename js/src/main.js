@@ -1,1 +1,1 @@
- var square = x => x * x;
+const square = x => x * x;
