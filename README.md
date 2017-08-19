@@ -7,6 +7,8 @@ in each branch to indicate what has changed.
 
 ### 00_initial
 
+------
+
 No Webpack yet.
 
 - demo-plugin.php -- The plugin. It adds some content and enqueues assets. That is all.
