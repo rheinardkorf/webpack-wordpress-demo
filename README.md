@@ -6,6 +6,97 @@ A simple plugin to demonstrate a Webpack workflow with WordPress.
 
 * Node.js -- Install from https://nodejs.org or using NVM (recommended).
 
+## 03_sass
+
+The most confusing aspect of working with CSS in a Webpack workflow is that the CSS gets added as a module. First lets
+get a basic Sass workflow setup before we "fix" it.
+
+Install the required dependencies...
+
+```
+npm install --save-dev css-loader node-sass sass-loader style-loader
+```
+
+Add the relevant loaders for our Sass workflow to `webpack.config.js` below the JS rules:
+
+```
+// Run Sass through loaders before bundling into `style.css`
+{
+    test: /\.scss$/,
+    enforce: 'pre',
+    loader: [ 'style-loader', 'css-loader', 'sass-loader' ]
+},
+```
+
+Now for the weird part. To get our CSS to run through the loaders and get our Sass compiled we need to import the Sass
+entry file into our JS entry file.
+
+Example in main.js:
+```
+import '../../css/src/style.scss';
+
+const square = x => x * x;
+```
+
+Webpack bundles our CSS as a Javascript module inside `scripts.js`. Though this is fine in some cases, its just not the
+WordPress way. Lets extract our CSS out of the bundled file and compile our Sass to our `css/style.css` file instead.
+
+We now need to install a Webpack plugin and reconfigure our `webpack.config.js` file.
+
+Install `extract-text-webpack-plugin`:
+
+```
+npm install --save-dev extract-text-webpack-plugin
+```
+
+Now define our new plugin object at the top of `webpack.config.js`:
+
+```
+const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
+```
+
+Replace our loader for CSS in the `webpack.config.js` file with the plugin and setup our plugin.
+
+```
+{
+    test: /\.scss$/,
+    enforce: 'pre',
+    loader: ExtractTextPlugin.extract( [
+        {
+            loader: 'css-loader',
+            options: {
+                minimize: true,
+                sourceMap: true
+            }
+        },
+        {
+            loader: 'sass-loader'
+        }
+    ] )
+},
+```
+
+Notice above that we have dropped using `style-loader` as this is responsible for turning CSS into a module, but we now
+want a file instead.
+
+Add a new `plugins:` key to our webpack.config.file object and specify the location of our CSS file relative to the
+bundled JS file:
+
+```
+plugins: [
+    new ExtractTextPlugin( {
+        filename: '../css/style.css'
+    } )
+]
+```
+
+Great! Now you have Sass setup. You can now use Sass modules and the @import command.
+
+Note: You have to include your root Sass file as an import in your main.js file.
+
+
+-----
+
 ## 02_babel_es6
 
 To get more out of the Webpack workflow we will install and configure Babel for transpiling our ES2015 Javascript.
