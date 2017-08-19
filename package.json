@@ -1,0 +1,22 @@
+{
+  "name": "demo-plugin",
+  "version": "1.0.0",
+  "description": "A plugin to demonstrate Webpack with WordPress.",
+  "scripts": {
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rheinardkorf/webpack-wordpress-demo.git"
+  },
+  "author": "Rheinard Korf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rheinardkorf/webpack-wordpress-demo/issues"
+  },
+  "homepage": "https://github.com/rheinardkorf/webpack-wordpress-demo#readme",
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  }
+}
