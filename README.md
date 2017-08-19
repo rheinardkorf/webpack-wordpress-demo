@@ -5,9 +5,7 @@ A simple plugin to demonstrate a Webpack workflow with WordPress.
 Each progression of the plugin will be saved into its own branch and this README.md will be updated
 in each branch to indicate what has changed.
 
-### 00_initial
-
-------
+## 00_initial
 
 No Webpack yet.
 
