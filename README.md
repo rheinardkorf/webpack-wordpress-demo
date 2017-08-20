@@ -6,6 +6,88 @@ A simple plugin to demonstrate a Webpack workflow with WordPress.
 
 * Node.js -- Install from https://nodejs.org or using NVM (recommended).
 
+## 05_browser_sync
+
+Running Webpack with the --watch flag will constantly bundle your source files as you make changes. This is handy, but
+still requires extra keystrokes to be refresh the page to see the changes. We could do some hot reloading with Webpack,
+but there is a handy tool called BrowserSync that kicks this up a notch by synchronising all changes across
+browsers. Pair that with Webpack and you have a powerful tool set that bundles your code in memory, spins up a proxy
+server for synchronising any number of browsers on your network.
+
+Here is how you set this up in Webpack for WordPress development.
+
+Install `browser-sync` as a dependency:
+
+```
+npm install --save browser-sync
+```
+
+Install `browser-sync-webpack-plugin`:
+
+```
+npm install --save-dev browser-sync-webpack-plugin
+```
+
+Require the Browser Sync Plugin:
+
+```
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+```
+
+Next we will configure BrowserSync. There are a few configuration options to consider, so to do this we will create
+a new object in `webpack.config.js` to define our settings.
+
+```
+const settings = {
+    // The BrowserSync hostname
+	host: 'localhost',
+	// The port to run BrowserSync's server on
+	port: 3333,
+
+	// A target to proxy all BrowserSync requests to.
+	// This can be a local web server, Vagrant or a docker container.
+	// This is your local/VM WordPress development site.
+	proxy: 'localhost',
+
+	// If you have your Site URL for WordPress set to anything else other than the proxy address,
+	// we need to override all URL. In this example I am overriding my site at http://training-ground.local
+	urlOverride: /training-ground\.local/g
+};
+```
+
+Setup the BrowserSync plugin in `webpack.config.js`:
+
+```
+new BrowserSyncPlugin({
+    host: settings.host,
+    port: settings.port,
+    proxy: settings.proxy,
+    rewriteRules: [
+        {
+            match: settings.urlOverride,
+            fn: function (req, res, match) {
+                return settings.host + ':' + settings.port;
+            }
+        }
+    ]
+})
+```
+
+That's all you need to setup BrowserSync.
+
+Run `npm start` which runs Webpack with the --watch flag. This is required to run the BrowserSync plugin and start the
+BrowserSync server.
+
+This should trigger the default browser to open the Local URL at the designated port. You will also see an External URL
+which allows any device on your network to be synced. Try this URL on your smartphone, while you have your desktop browser
+open. Navigate around and you will now see how browsers are kept in sync.
+
+You might have to play with the settings a bit to fit your particular setup.
+In my case I am running my site using https://github.com/10up/wp-local-docker and have my site URL pointing to
+http://training-ground.local which is an entry in my hosts file.
+
+-----
+
 ## 04_lint_and_minify
 
 In WordPress we like to use standards, so we're going to setup JS linting (with ESLint) and CSS linting.
