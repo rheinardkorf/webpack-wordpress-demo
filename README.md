@@ -6,6 +6,32 @@ A simple plugin to demonstrate a Webpack workflow with WordPress.
 
 * Node.js -- Install from https://nodejs.org or using NVM (recommended).
 
+## 06_final
+
+To wrap things up I am going to use demonstrate using multiple Sass modules and JS modules to see how everything comes
+together.
+
+Importing structure:
+
+- main.js has to import `css\src\style.scss` )
+- style.scss demonstrates using two modules. One that defined colour variables and a _main.css with a simple style applied.
+- main.js imports the bootstrap.js module.
+
+To see the details please look in `css/src` and `js/src`.
+
+That's it!
+
+Please visit the other branches for reviewing the process.
+
+[00 - Initial setup ](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/00-initial)
+[01 - Initial Webpack setup](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/01_npm_webpack)
+[02 - Babel setup](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/02_babel_es6)
+[03 - Setup Sass](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/03_sass)
+[04 - Linting and Minifying](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/04_lint_and_minify)
+[05 - Setting up Webpack](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/05_browser_sync)
+
+-----
+
 ## 05_browser_sync
 
 Running Webpack with the --watch flag will constantly bundle your source files as you make changes. This is handy, but

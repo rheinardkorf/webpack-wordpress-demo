@@ -1,7 +1,8 @@
 import '../../css/src/style.scss';
+import bootstrap from './bootstrap';
 
-const square = x => x * x;
+bootstrap.ready( function() {
 
-var y = 2;
-
-console.log( square( y ) );
+	var demoDiv = document.getElementById( 'demo-plugin-item' );
+	demoDiv.appendChild( document.createTextNode( '### This worked! ###' ) );
+});
