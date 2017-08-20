@@ -23,12 +23,12 @@ That's it!
 
 Please visit the other branches for reviewing the process.
 
-[00 - Initial setup ](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/00-initial)
-[01 - Initial Webpack setup](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/01_npm_webpack)
-[02 - Babel setup](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/02_babel_es6)
-[03 - Setup Sass](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/03_sass)
-[04 - Linting and Minifying](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/04_lint_and_minify)
-[05 - Setting up Webpack](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/05_browser_sync)
+- [00 - Initial setup ](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/00-initial)
+- [01 - Initial Webpack setup](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/01_npm_webpack)
+- [02 - Babel setup](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/02_babel_es6)
+- [03 - Setup Sass](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/03_sass)
+- [04 - Linting and Minifying](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/04_lint_and_minify)
+- [05 - Setting up Webpack](https://github.com/rheinardkorf/webpack-wordpress-demo/tree/05_browser_sync)
 
 -----
 
