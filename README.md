@@ -6,6 +6,121 @@ A simple plugin to demonstrate a Webpack workflow with WordPress.
 
 * Node.js -- Install from https://nodejs.org or using NVM (recommended).
 
+## 04_lint_and_minify
+
+In WordPress we like to use standards, so we're going to setup JS linting (with ESLint) and CSS linting.
+
+### Setup ESLint
+
+Install ESLint packages:
+
+```
+npm install --save-dev eslint eslint-loader eslint-config-wordpress
+```
+
+Create a new `.eslintrc` file and configure it with the following minimal settings (you can build on these later):
+
+```
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    // Use the WordPress ESLint config.
+    "wordpress"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}
+```
+
+Now setup ESLint as a loader in `webpack.config.js`:
+
+```
+{
+    enforce: 'pre',
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loader: 'eslint-loader',
+    options: {
+        emitWarning: true,
+    }
+},
+```
+
+Now running `npm start` or `npm run build` will lint your JS source files with the .eslintrc config.
+
+### Setup `stylelint` for CSS
+
+Install `stylelint` packages:
+
+```
+npm install --save-dev stylelint stylelint-config-standard stylelint-processor-html stylelint-webpack-plugin
+```
+
+Create a new `.stylelintrc` configuration file with the follow config:
+
+```
+{
+  "processors": ["stylelint-processor-html"],
+  "extends": "stylelint-config-standard"
+}
+```
+
+Require the stylelint plugin:
+
+```
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+```
+
+Configure the `stylelint-webpack-plugin` in `webpack.config.js` (add this to the plugins object):
+
+```
+new StyleLintPlugin({ syntax: 'scss' })
+```
+
+Now running `npm start` or `npm run build` will lint your Sass files with the .stylelintrc config.
+
+### Minifying your output files
+
+Install the `uglifyjs-webpack-plugin` package:
+
+```
+npm install --save-dev uglifyjs-webpack-plugin
+```
+
+Require the plugin
+```
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+```
+
+Add the plugin to `webpack.config.js` in the plugins object mangle everything except a few and set sourceMap to true:
+```
+new UglifyJSPlugin({
+    mangle: {
+        // Dont mangle these
+        except: ['$super', '$', 'exports', 'require']
+    },
+    sourceMap: true
+})
+```
+
+*NOTE:* In out previous section for Sass we already set the sourceMap to true.
+
+Now running `npm start` or `npm run build` will minify your outputs.
+
+However, source maps are not being created. To fix this add the following key:value pair to your Webpack config:
+
+```
+devtool: 'source-map',
+```
+
+Awesome! Now you have minified files including the source maps.
+
+-----
+
 ## 03_sass
 
 The most confusing aspect of working with CSS in a Webpack workflow is that the CSS gets added as a module. First lets

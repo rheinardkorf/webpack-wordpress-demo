@@ -1,1 +1,2 @@
-/** this comment will disappear */
+!function(n){function t(e){if(r[e])return r[e].exports;var o=r[e]={i:e,l:!1,exports:{}};return n[e].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var r={};t.m=n,t.c=r,t.d=function(exports,n,r){t.o(exports,n)||Object.defineProperty(exports,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(n){var r=n&&n.__esModule?function(){return n.default}:function(){return n};return t.d(r,"a",r),r},t.o=function(n,t){return Object.prototype.hasOwnProperty.call(n,t)},t.p="",t(t.s=0)}([function(n,exports,t){"use strict";t(1);console.log(function(n){return n*n}(2))},function(n,exports){}]);
+//# sourceMappingURL=scripts.js.map

@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    // Use the WordPress ESLint config.
+    "wordpress"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}
