@@ -8,7 +8,7 @@ A simple plugin to demonstrate a Webpack workflow with WordPress.
 
 ## 03_sass
 
-The most confusing aspect of working with CSS in a Webpack workflow is that the CSS gets added as a module. First lets
+The most confusing aspect of working with CSS in a Webpack workflow is that the CSS gets added as a JS module. First lets
 get a basic Sass workflow setup before we "fix" it.
 
 Install the required dependencies...
@@ -120,21 +120,21 @@ This is done by adding a `modules` key to the Webpack config (one way of doing i
 const path = require( 'path' );
 
 module.exports = {
-	entry: './js/src/main.js',
-	output: {
-		filename: 'scripts.js',
-		path: path.resolve( __dirname, 'js' )
-	},
-	module: {
-		loaders: [
-			// Run JS through Babel Loader before bundling it to `scripts.js`
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader'
-			}
-		]
-	}
+  entry: './js/src/main.js',
+  output: {
+    filename: 'scripts.js',
+    path: path.resolve( __dirname, 'js' )
+  },
+  module: {
+    loaders: [
+      // Run JS through Babel Loader before bundling it to `scripts.js`
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      }
+    ]
+  }
 }
 ```
 
@@ -194,11 +194,11 @@ Create the initial, but basic, `webpack.config.js` file containing:
 const path = require( 'path' );
 
 module.exports = {
-	entry: './js/src/main.js',
-	output: {
-		filename: 'scripts.js',
-		path: path.resolve( __dirname, 'js' )
-	}
+  entry: './js/src/main.js',
+  output: {
+    filename: 'scripts.js',
+    path: path.resolve( __dirname, 'js' )
+  }
 }
 ```
 
