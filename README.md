@@ -9,10 +9,10 @@ A simple plugin to demonstrate a Webpack workflow with WordPress.
 ## 05_browser_sync
 
 Running Webpack with the --watch flag will constantly bundle your source files as you make changes. This is handy, but
-still requires extra keystrokes to be refresh the page to see the changes. We could do some hot reloading with Webpack,
+still requires extra keystrokes to refresh the browswe to see the changes. We could do some hot reloading with Webpack,
 but there is a handy tool called BrowserSync that kicks this up a notch by synchronising all changes across
-browsers. Pair that with Webpack and you have a powerful tool set that bundles your code in memory, spins up a proxy
-server for synchronising any number of browsers on your network.
+browsers. This gives you a powerful tool set that bundles your code in memory and spin up a proxy server for synchronising
+any number of browsers on your network.
 
 Here is how you set this up in Webpack for WordPress development.
 
@@ -40,18 +40,18 @@ a new object in `webpack.config.js` to define our settings.
 ```
 const settings = {
     // The BrowserSync hostname
-	host: 'localhost',
-	// The port to run BrowserSync's server on
-	port: 3333,
+  host: 'localhost',
+  // The port to run BrowserSync's server on
+  port: 3333,
 
-	// A target to proxy all BrowserSync requests to.
-	// This can be a local web server, Vagrant or a docker container.
-	// This is your local/VM WordPress development site.
-	proxy: 'localhost',
+  // A target to proxy all BrowserSync requests to.
+  // This can be a local web server, Vagrant or a docker container.
+  // This is your local/VM WordPress development site.
+  proxy: 'localhost',
 
-	// If you have your Site URL for WordPress set to anything else other than the proxy address,
-	// we need to override all URL. In this example I am overriding my site at http://training-ground.local
-	urlOverride: /training-ground\.local/g
+  // If you have your Site URL for WordPress set to anything else other than the proxy address,
+  // we need to override all URL. In this example I am overriding my site at http://training-ground.local
+  urlOverride: /training-ground\.local/g
 };
 ```
 
@@ -75,7 +75,7 @@ new BrowserSyncPlugin({
 
 That's all you need to setup BrowserSync.
 
-Run `npm start` which runs Webpack with the --watch flag. This is required to run the BrowserSync plugin and start the
+Run `npm start` which runs Webpack with the --watch flag and also runs the BrowserSync plugin to start the
 BrowserSync server.
 
 This should trigger the default browser to open the Local URL at the designated port. You will also see an External URL
@@ -90,7 +90,7 @@ http://training-ground.local which is an entry in my hosts file.
 
 ## 04_lint_and_minify
 
-In WordPress we like to use standards, so we're going to setup JS linting (with ESLint) and CSS linting.
+Because we like to use standards we're going to setup JS linting (with ESLint) and CSS linting.
 
 ### Setup ESLint
 
@@ -132,7 +132,7 @@ Now setup ESLint as a loader in `webpack.config.js`:
 },
 ```
 
-Now running `npm start` or `npm run build` will lint your JS source files with the .eslintrc config.
+If you now run `npm start` or `npm run build` it will lint your JS source files with the .eslintrc config.
 
 ### Setup `stylelint` for CSS
 
@@ -178,7 +178,7 @@ Require the plugin
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 ```
 
-Add the plugin to `webpack.config.js` in the plugins object mangle everything except a few and set sourceMap to true:
+Add the plugin to `webpack.config.js` in the plugins object to mangle everything except a few and set sourceMap to true:
 ```
 new UglifyJSPlugin({
     mangle: {
@@ -189,7 +189,7 @@ new UglifyJSPlugin({
 })
 ```
 
-*NOTE:* In out previous section for Sass we already set the sourceMap to true.
+*NOTE:* In our previous section for Sass we already set the sourceMap to true.
 
 Now running `npm start` or `npm run build` will minify your outputs.
 
@@ -205,7 +205,7 @@ Awesome! Now you have minified files including the source maps.
 
 ## 03_sass
 
-The most confusing aspect of working with CSS in a Webpack workflow is that the CSS gets added as a module. First lets
+The most confusing aspect of working with CSS in a Webpack workflow is that the CSS gets added as a JS module. First lets
 get a basic Sass workflow setup before we "fix" it.
 
 Install the required dependencies...
@@ -317,21 +317,21 @@ This is done by adding a `modules` key to the Webpack config (one way of doing i
 const path = require( 'path' );
 
 module.exports = {
-	entry: './js/src/main.js',
-	output: {
-		filename: 'scripts.js',
-		path: path.resolve( __dirname, 'js' )
-	},
-	module: {
-		loaders: [
-			// Run JS through Babel Loader before bundling it to `scripts.js`
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader'
-			}
-		]
-	}
+  entry: './js/src/main.js',
+  output: {
+    filename: 'scripts.js',
+    path: path.resolve( __dirname, 'js' )
+  },
+  module: {
+    loaders: [
+      // Run JS through Babel Loader before bundling it to `scripts.js`
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      }
+    ]
+  }
 }
 ```
 
@@ -391,11 +391,11 @@ Create the initial, but basic, `webpack.config.js` file containing:
 const path = require( 'path' );
 
 module.exports = {
-	entry: './js/src/main.js',
-	output: {
-		filename: 'scripts.js',
-		path: path.resolve( __dirname, 'js' )
-	}
+  entry: './js/src/main.js',
+  output: {
+    filename: 'scripts.js',
+    path: path.resolve( __dirname, 'js' )
+  }
 }
 ```
 
